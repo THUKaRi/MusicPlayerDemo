@@ -2,25 +2,52 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app = "http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/gray_color">
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_activity_myLists"
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        app:title="我的歌单列表"
-        app:navigationIcon="@drawable/back_detail_activity"/>
-    <ListView
-        android:id="@+id/listView_activity_myLists"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:scrollbarSize="@dimen/dp_5"
-        android:verticalScrollbarPosition="right"
-        android:fadeScrollbars="true"
-        android:scrollbarThumbVertical="@drawable/scrollbars"
-        android:scrollbarTrackVertical="@drawable/scrollbar_track"/>
+        android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floatingActionButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:clickable="true"
+            android:contentDescription="@string/add_list"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/plus" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_activity_myLists"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/back_detail_activity"
+            app:title="我的歌单列表" />
+
+        <ListView
+            android:id="@+id/listView_activity_myLists"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadeScrollbars="true"
+            android:scrollbarSize="@dimen/dp_5"
+            android:scrollbarThumbVertical="@drawable/scrollbars"
+            android:scrollbarTrackVertical="@drawable/scrollbar_track"
+            android:scrollbars="vertical"
+            android:verticalScrollbarPosition="right"
+            tools:layout_constraintTop_toBottomOf="@id/toolbar_activity_myLists"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="60dp" />
+    </android.support.constraint.ConstraintLayout>
+
+
 
 </LinearLayout>
