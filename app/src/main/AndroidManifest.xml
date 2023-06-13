@@ -20,8 +20,7 @@
         <activity
             android:name=".activity.ListsActivity"
             android:exported="false"
-            android:label="@string/title_activity_lists"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_lists" />
         <activity
             android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
