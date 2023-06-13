@@ -23,7 +23,7 @@ public class ListAdapter extends ArrayAdapter<SongList> {
     //适配器的构造函数
 
 
-    public ListAdapter(@NonNull Context context, int resourceId, @NonNull List<SongList> objects) {
+    public ListAdapter(Context context, int resourceId,List<SongList> objects) {
         super(context, resourceId, objects);
         this.context = context;
         this.resourceId = resourceId;
@@ -44,12 +44,12 @@ public class ListAdapter extends ArrayAdapter<SongList> {
     //这个方法在每个子项被滚动到屏幕内的时候会被调用
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        SongList songList = getItem(position); // 获取当前项的Song实例
+        SongList songList = getItem(position); // 获取当前项的SongList实例
         View view;//子项布局对象
-        SongAdapter.ViewHolder viewHolder;//内部类对象
+        ListAdapter.ViewHolder viewHolder;//内部类对象
         if (convertView == null) {//如果是第一次加载
             view = LayoutInflater.from(getContext()).inflate(resourceId, parent, false);//布局对象化
-            viewHolder = new SongAdapter.ViewHolder();
+            viewHolder = new ListAdapter.ViewHolder();
 
             //把布局文件里面的4个对象加载出来
             viewHolder.songImage = view.findViewById(R.id.song_image);
@@ -59,13 +59,14 @@ public class ListAdapter extends ArrayAdapter<SongList> {
             view.setTag(viewHolder); // 将ViewHolder存储在View中
         } else {//不是第一次加载，即布局文件已经加载，可以利用
             view = convertView;
-            viewHolder = (SongAdapter.ViewHolder) view.getTag(); // 重新获取ViewHolder
+            viewHolder = (ListAdapter.ViewHolder) view.getTag(); // 重新获取ViewHolder
         }
         if(songList!=null && viewHolder!=null){
+            String s ="共："+songList.getSongCount()+" 首";
             //传入具体信息
-            viewHolder.songImage.setImageBitmap(songList.getAlbum_icon());//列表每一项的图标
-            viewHolder.songName.setText(songList.getListName());//歌名
-            viewHolder.songAuthor.setText(songList.getSongCount());//歌手
+            viewHolder.songImage.setImageBitmap(songList.getAlbum_icon());//歌单第一首的专辑图片
+            viewHolder.songName.setText(songList.getListName());//歌单名
+            viewHolder.songAuthor.setText(s);//歌单音乐数
 
             //设置两个文本的字体style
             viewHolder.songName.setTypeface(Typeface.DEFAULT_BOLD);

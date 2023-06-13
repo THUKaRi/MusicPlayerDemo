@@ -34,7 +34,7 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@drawable/start_window</item>
+        <item name="android:windowBackground">@drawable/milky_way</item>
         <item name="android:windowFullscreen">true</item>
     </style>
 

@@ -216,7 +216,7 @@ public class DisplayActivity extends BaseActivity {
         DrawerLayoutListViewItem myLoveSongs = new DrawerLayoutListViewItem(R.drawable.love, "我喜欢的音乐");
         DrawerLayoutListViewItem stopWithTime = new DrawerLayoutListViewItem(R.drawable.stop_with_time, "定时停止播放");
         DrawerLayoutListViewItem play_mode_select = new DrawerLayoutListViewItem(R.drawable.setting, "播放模式");
-        DrawerLayoutListViewItem feedback_suggestions = new DrawerLayoutListViewItem(R.drawable.about, "关于");
+        DrawerLayoutListViewItem feedback_suggestions = new DrawerLayoutListViewItem(R.drawable.about, "我的歌单");
         DrawerLayoutListViewItem exit = new DrawerLayoutListViewItem(R.drawable.exit, "退出");
         drawer_list_view_content.add(myLoveSongs);
         drawer_list_view_content.add(play_mode_select);
@@ -253,9 +253,9 @@ public class DisplayActivity extends BaseActivity {
                             Toast.makeText(DisplayActivity.this, "本机无歌曲,请下载！", Toast.LENGTH_SHORT).show();
                         }
                         break;
-                    case 3://反馈与建议
-                        feedbackAndSuggesttions();
-                        drawerlayout.closeDrawer(GravityCompat.START);
+                    case 3://我的歌单
+                        Intent intent1 = new Intent(DisplayActivity.this,ListsActivity.class);
+                        startActivity(intent1);
                         break;
                     case 4://退出
                         Intent stop_service_intent = new Intent(DisplayActivity.this, MusicService.class);

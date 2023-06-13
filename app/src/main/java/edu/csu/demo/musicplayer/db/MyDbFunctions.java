@@ -162,6 +162,22 @@ public class MyDbFunctions {
         return songLists;
     }
 
+    public void deleteList(int listID){
+        if(db!=null){
+            db.delete("SONG_LIST","id=?",new String[]{listID+""});
+            db.delete("LIST_SONGS","listID=?",new String[]{listID+""});
+        }
+    }
+
+    public void deleteSongFromList(String listName,String songTitle){
+        int listID = getListID(listName);
+        if (db!=null){
+            Cursor cursor1 = db.query("SONGS",null,"title=?",new String[]{songTitle},null,null,null);
+            int songID =cursor1.getInt(cursor1.getColumnIndex("id"));
+            db.delete("LIST_SONGS","listID=?,songID=?",new String[]{listID+"",songID+""});
+        }
+    }
+
     public int addSongToList(String listName,Song song){
         int listID = 0;
         int songID = 0;
