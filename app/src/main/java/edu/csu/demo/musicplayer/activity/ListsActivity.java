@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,11 +17,12 @@ import java.util.List;
 
 import edu.csu.demo.musicplayer.R;
 import edu.csu.demo.musicplayer.db.MyDbFunctions;
+import edu.csu.demo.musicplayer.model.BaseActivity;
 import edu.csu.demo.musicplayer.model.SongList;
 import edu.csu.demo.musicplayer.tool.ListAdapter;
 import edu.csu.demo.musicplayer.tool.SongAdapter;
 
-public class ListsActivity extends AppCompatActivity {
+public class ListsActivity extends BaseActivity {
 
     private static List<SongList> myLists = new ArrayList<>();//有序可重复
     private static MyDbFunctions myDbFunctions;
@@ -48,9 +50,18 @@ public class ListsActivity extends AppCompatActivity {
         final ListView listView = findViewById(R.id.listView_activity_myLists);
         listView.setAdapter(adapter);
 
-//        if(myLists.size()==0){
-//            Toast.makeText(ListsActivity.this, "还没有创建过歌单", Toast.LENGTH_SHORT).show();
-//        }
+        if(myLists.size()==0){
+            Toast.makeText(ListsActivity.this, "还没有创建过歌单", Toast.LENGTH_SHORT).show();
+        }
+
+        FloatingActionButton floatingActionButton = findViewById(R.id.button_to_add_list);
+        floatingActionButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListsActivity.this, addListActivity.class);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

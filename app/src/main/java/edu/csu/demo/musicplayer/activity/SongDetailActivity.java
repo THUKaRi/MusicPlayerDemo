@@ -46,7 +46,7 @@ public class SongDetailActivity extends BaseActivity implements View.OnClickList
     private Song current_song;
     private ArrayList<Song> myLoveSongs;//歌曲列表
     private TextView song_name,song_artist,duration_text,current_progress_text;
-    private ImageView play_pause_action,pre_action,next_action,playMode;
+    private ImageView play_pause_action,pre_action,next_action,playMode,add_list;
     private SeekBar seekBar;
     private ProgressBarReceiver progressBarReceiver ;
     private StatusChangedReceiver statusChangedReceiver;
@@ -111,6 +111,19 @@ public class SongDetailActivity extends BaseActivity implements View.OnClickList
             play_pause_action.setImageDrawable(getResources().getDrawable(R.drawable.play));
         }
         play_pause_action.setOnClickListener(this);
+
+        add_list = findViewById(R.id.add_to_list_action);
+        add_list.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SongDetailActivity.this, addToListActivity.class);
+                intent.putExtra("CURRENT_SONG_NAME",current_song.getTitle());
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
         //上一首
         pre_action = findViewById(R.id.pre_action);
         pre_action.setOnClickListener(this);

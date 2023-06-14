@@ -134,12 +134,19 @@ public class MyDbFunctions {
         return list;
     }
 
-    public void createList(String listName){
+    public boolean createList(String listName){
         if(listName != null && !listName.equals("") && db != null){
+            Cursor cursor = db.query("SONG_LIST",null,"listName=?",new String[]{listName},null,null,null);
+            if(cursor.moveToFirst()){
+                return false;
+            }
+            cursor.close();
             ContentValues values = new ContentValues();
             values.put("listName",listName);
             db.insert("SONG_LIST",null,values);
+            return true;
         }
+        return false;
     }
 
     public ArrayList<SongList> loadLists(){
@@ -150,7 +157,9 @@ public class MyDbFunctions {
                 do {
                     SongList songList = new SongList();
                     Song song = getListFirstSong(cursor.getInt(cursor.getColumnIndex("id")));
-                    songList.setAlbum_icon(song.getAlbum_icon());
+                    if(song!=null) {
+                        songList.setAlbum_icon(song.getAlbum_icon());
+                    }
                     songList.setListID(cursor.getInt(cursor.getColumnIndex("id")));
                     songList.setListName(cursor.getString(cursor.getColumnIndex("listName")));
                     songList.setSongCount(getListSongs(songList.getListName()).size());
@@ -178,35 +187,39 @@ public class MyDbFunctions {
         }
     }
 
-    public int addSongToList(String listName,Song song){
+    public boolean addSongToList(String listName,String songTitle){
         int listID = 0;
         int songID = 0;
         if(db!=null&&listName!=null){
             listID = getListID(listName);
-            Cursor cursor1 = db.query("SONGS",null,"title=?",new String[]{song.getTitle()},null,null,null);
-            songID=cursor1.getInt(cursor1.getColumnIndex("id"));
+            Cursor cursor1 = db.query("SONGS",null,"title=?",new String[]{songTitle},null,null,null);
+            if(cursor1.moveToFirst()) {
+                songID = cursor1.getInt(cursor1.getColumnIndex("id"));
+            }
             cursor1.close();
         }
         //如果已经有就不再添加
         if(listID!=0&&songID!=0){
-            Cursor cursor = db.query("LIST_SONGS",null,"listID=?,songID=?",new String[]{String.valueOf(listID),String.valueOf(songID)},null,null,null);
-            if(cursor.moveToFirst()){
+            Cursor cursor = db.query("LIST_SONGS",null,"listID=? AND songID=?",new String[]{listID+"",songID+""},null,null,null);
+            if(!cursor.moveToFirst()){
                 ContentValues values = new ContentValues();
                 values.put("songID",songID);
                 values.put("listID",listID);
                 db.insert("LIST_SONGS",null,values);
                 cursor.close();
-                return 1;
+                return true;
             }
         }
-        return 0;
+        return false;
     }
 
     public int getListID(String listName){
         int listID = 0;
         if(db!=null&&listName!=null){
             Cursor cursor = db.query("SONG_LIST",null,"listName=?",new String[]{listName},null,null,null);
-            listID=cursor.getInt(cursor.getColumnIndex("id"));
+            if(cursor.moveToFirst()) {
+                listID = cursor.getInt(cursor.getColumnIndex("id"));
+            }
             cursor.close();
         }
         return listID;

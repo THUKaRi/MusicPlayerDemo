@@ -5,10 +5,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
-/**
- * Created by 阮 on 2018/11/17.
- */
-
 public class BaseActivity extends AppCompatActivity {
     private static Context context;//内存泄露风险，待解决
 

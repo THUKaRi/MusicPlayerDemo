@@ -13,7 +13,7 @@
         android:layout_height="match_parent">
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/button_to_add_list"
+            android:id="@+id/button_add_list"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -24,17 +24,16 @@
             android:src="@drawable/plus" />
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar_activity_myLists"
+            android:id="@+id/toolbar_activity_addToList"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:navigationIcon="@drawable/back_detail_activity"
-            app:title="我的歌单列表" />
+            app:navigationIcon="@drawable/back_detail_activity" />
 
         <ListView
-            android:id="@+id/listView_activity_myLists"
+            android:id="@+id/listView_activity_addToList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fadeScrollbars="true"
@@ -43,11 +42,8 @@
             android:scrollbarTrackVertical="@drawable/scrollbar_track"
             android:scrollbars="vertical"
             android:verticalScrollbarPosition="right"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_activity_myLists"
-            tools:layout_constraintTop_toBottomOf="@id/toolbar_activity_myLists"
+            app:layout_constraintTop_toBottomOf="@id/toolbar_activity_addToList"
             tools:layout_editor_absoluteX="16dp" />
     </android.support.constraint.ConstraintLayout>
-
-
 
 </LinearLayout>

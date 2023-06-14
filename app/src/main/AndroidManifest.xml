@@ -18,6 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".activity.addListActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.addToListActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activity.ListSongsActivity"
             android:configChanges="locale|keyboard|keyboardHidden|screenLayout|fontScale|orientation|screenSize|smallestScreenSize"
             android:screenOrientation="portrait"
